@@ -35,28 +35,32 @@ const port = process.env.PORT || 80;
 //		console.log( "Displayed JSON.");
 
 		// select dropdown item for Asian Pacific Alumni Association
-		const apaa = await page.select('select', 'Affinity: Asian Pacific');
+		page.waitForSelector('select[name="selectedtopicInterests"]')
+			.then( () => const apaa = await page.select('select', 'Affinity: Asian Pacific');
 
-		await page.click('button[data-aura-rendered-by="303:2;a"]');
+				await page.click('button[data-aura-rendered-by="303:2;a"]');
 		
-		const apaajson = false;
-		// get a console log beginning with "result:"
-		page.on('console', async (msg) => {
-			if( msg.indexOf('result: ') == 0 ) {
-				apaajson = msg.replace('result: q	test ','');
-			}
-		});
+				const apaajson = false;
+				// get a console log beginning with "result:"
+				page.on('console', async (msg) => {
+					if( msg.indexOf('result: ') == 0 ) {
+						apaajson = msg.replace('result: q	test ','');
+					}
+				});
 
-		http.createServer(function (req, res) {
-			if( apaajson ) {
-				res.writeHead(200, {'Content-Type': 'text/json'});
-				res.end( apaajson );
-			} else {
-				res.writeHead(200, {'Content-Type': 'text/html'});
-				res.end( 'false' );
-			}
-		}).listen( port );
-		console.log( "Displayed JSON.");
+				http.createServer(function (req, res) {
+					if( apaajson ) {
+						res.writeHead(200, {'Content-Type': 'text/json'});
+						res.end( apaajson );
+					} else {
+						res.writeHead(200, {'Content-Type': 'text/html'});
+						res.end( 'false' );
+					}
+				}).listen( port );
+				console.log( "Displayed JSON.");
+
+
+		);
 
 
 
