@@ -35,7 +35,7 @@ const port = process.env.PORT || 80;
 //		console.log( "Displayed JSON.");
 
 		// select dropdown item for Asian Pacific Alumni Association
-		const apaa = await page.select('#258:2;a', 'Affinity: Asian Pacific');
+		const apaa = await page.select('select[name="selectedtopicInterests"]', 'Affinity: Asian Pacific');
 
 		await page.click('button[data-aura-rendered-by="303:2;a"]');
 		
