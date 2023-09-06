@@ -36,7 +36,7 @@ const port = process.env.PORT || 80;
 
 		// select dropdown item for Asian Pacific Alumni Association
 		page.waitForSelector('select[name="selectedtopicInterests"]')
-			.then( () => const apaa = await page.select('select', 'Affinity: Asian Pacific');
+			.then( () => await page.select('select', 'Affinity: Asian Pacific');
 
 				await page.click('button[data-aura-rendered-by="303:2;a"]');
 		
