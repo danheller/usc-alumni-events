@@ -1,7 +1,7 @@
 const http = require('http');
 const puppeteer = require('puppeteer');
 //const fs = require('fs');
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 (async () => {
 	const browser = await puppeteer.launch({
 //		defaultViewport: {width: 1920, height: 1080},
