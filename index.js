@@ -24,6 +24,12 @@ const port = process.env.PORT || 80;
 //		fs.writeFileSync('data/events.json', JSON.stringify(eventsjson));
 		console.log( eventsjson.length + " events found.");
 
+//		ss = location.search.substring(1);
+//		if(ss) {
+//			if(ss.indexOf('add=')!=-1) {
+//				el = $(".add li a.service");
+//				loadcustomize();
+//			}
 
 
 //		http.createServer(function (req, res) {
@@ -46,14 +52,14 @@ const port = process.env.PORT || 80;
 				if( 0 == msgtxt.indexOf('result: q') ) {
 					affinityresults = msgtxt.substring( msgtxt.indexOf('[') );
 					affinityresultsjson = JSON.parse( affinityresults );
-					console.log( affinityresultsjson.length + " events found.");
-//						console.log( apaaresultsjson );
+//					console.log( affinityresultsjson.length + " events found.");
+//					console.log( apaaresultsjson );
 
 					mergedeventsjson = [
 						...affinityresultsjson,
 						...mergedeventsjson
 					];
-					console.log( "Total events: " + mergedeventsjson.length );
+//					console.log( "Total events: " + mergedeventsjson.length );
 				}
 			});
 
@@ -65,7 +71,7 @@ const port = process.env.PORT || 80;
 			setTimeout( function() {
 				// select dropdown item for Asian Pacific Alumni Association
 				page.select('select', aff);
-				console.log( 'selected '+aff );
+//				console.log( 'selected '+aff );
 
 				page.waitForSelector('button.slds-button.slds-button_brand.w-full');
 				page.click('button.slds-button.slds-button_brand.w-full');
@@ -76,7 +82,7 @@ const port = process.env.PORT || 80;
 				//	});
 				//}, 5000 );
 
-				console.log( 'clicked Search' );
+//				console.log( 'clicked Search' );
 				// get a console log beginning with "result:"
 			}, delay );
 		});
@@ -86,14 +92,14 @@ const port = process.env.PORT || 80;
 			http.createServer(function (req, res) {
 				if( apaajson ) {
 					res.writeHead(200, {'Content-Type': 'text/json'});
-					res.end( JSON.stringify(mergedeventsjson) );
+					res.end( JSON.stringify( mergedeventsjson ) );
 				} else {
 					res.writeHead(200, {'Content-Type': 'text/html'});
 					res.end( 'false' );
 				}
 			}).listen( port );
-			console.log( "Displayed JSON.");
-			console.log( mergedeventsjson );
+			console.log( mergedeventsjson.length + " events found.");
+//			console.log( mergedeventsjson );
 			browser.close();
 		}, 10000 );
 
