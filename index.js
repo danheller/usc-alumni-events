@@ -5,7 +5,7 @@ const port = process.env.PORT || 80;
 (async () => {
 	const browser = await puppeteer.launch({
 //		defaultViewport: {width: 1920, height: 1080},
-		headless: true,
+		headless: new,
 		args: ['--no-sandbox','--disable-setuid-sandbox']
 	});
 	const page = await browser.newPage();
