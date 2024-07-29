@@ -8,18 +8,23 @@ const httpServer = http.createServer((request, response) => {
 	// Getting request path
 	// by using request.path
 
+	response.writeHead(200, {'Content-Type': 'text/json'});	
+	
 	(async () => {
 		const browser = await puppeteer.launch({
 			headless: true,
-			args: ['--no-sandbox','--disable-setuid-sandbox']
+			args: [
+			"--no-sandbox",
+			"--use-gl=egl",
+			"--disable-setuid-sandbox",
+			]
 		});
 		const page = await browser.newPage();
 	
 		const path = request.url;
 		console.log("Request URL: ", path)
 		let splitpath = path.split('/');
-		let showEvent = false;
-		let evId      = false;
+		let ev        = false;
 	
 	//	let keyword    = 'advancement';
 	//	let req        = false;
@@ -32,13 +37,14 @@ const httpServer = http.createServer((request, response) => {
 	
 		if( splitpath[1] ) {
 			if( 'event' == splitpath[1] ) {
-				evId = splitpath[2];
+				ev = splitpath[2];
+				console.log ( ev );
 			}
 		}
 	
-		if( evId ) {
+		if( ev ) {
 			try {
-				await page.goto('https://fightonline.usc.edu/Alumni/s/listing/' + evId );
+				await page.goto('https://fightonline.usc.edu/Alumni/s/listing/' + ev );
 		
 				// event data, e.g. https://fightonline.usc.edu/s/sfsites/aura?r=6&other.PORTAL_Listing.SERVER_getListings=1
 		
@@ -100,7 +106,7 @@ const httpServer = http.createServer((request, response) => {
 	
 		await browser.close();
 	})();
-	
+
 }).listen(port, () => {
 	console.log("Server is running at port " + port);
 });
